@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+   <link href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body ng-app = 'myApp'>
+<div ng-controller = 'mycontroller'  >
+       {{date}}
+       <input type="text" ng-model = 'name'>次数:{{count}}{{name}}
+</div>
+<div ng-controller = 'carcontroller'>
+    <table class="table" ng-show = 'cart.length'>
+      <caption><h3>购物车</h3></caption>
+      <thead>
+        <tr>
+          <th>产品编号</th>
+          <th>产品名字</th>
+          <th>购买数量</th>
+          <th>产品单价</th>
+          <th>产品总价</th>
+          <th>操作</th>          
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat = "item in cart">
+            <td>{{item.id}}</td>
+            <td>{{item.name}}</td>
+            <td>
+                <button type="button" class="btn btn-info" ng-click = 'reduce(item.id)'>-</button>
+                <input type="text" value="{{item.quantity}}" ng-model = 'item.quantity'>
+                <button type="button" class="btn btn-info" ng-click = 'add(item.id)'>+</button>
+            </td>
+            <td>{{item.price}}</td>
+            <td>{{item.price * item.quantity}}</td>
+            <td><button type="button" class="btn btn-danger" ng-click = 'remove(item.id)'>移除</button></td>
+        </tr>
+        <tr>
+            <td>
+                总购买价   
+                
+            </td>
+            <td>
+                {{totalPrice()}}
+            </td>
+            <td>
+                总购买数量
+            </td>
+            <td>
+                {{totalNumber()}}
+            </td>
+            <td colspan=" 2">
+                <button type="button" class="btn btn-danger" ng-click = 'cart={}'>清空购物车</button>
+            </td>
+        </tr>
+      </tbody>
+</table>
+<h1 ng-show='!cart.length' style="text-align: center;">你的购物车啥也没有...</h1>
+</div>
+<script src = './vendor/angular.min.js'></script>
+ <script src = './js/index.js'></script>
+</body>
+</html>
